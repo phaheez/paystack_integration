@@ -1,4 +1,5 @@
-﻿using PaystackPaymentIntegration.Models.Entities;
+﻿using PaystackPaymentIntegration.Models.DTOs.Readonly;
+using PaystackPaymentIntegration.Models.Entities;
 using PaystackPaymentIntegration.Models.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -11,8 +12,8 @@ namespace PaystackPaymentIntegration.Models.Interfaces
 {
     public interface ICart
     {
-        Task<IEnumerable<cart>> GetCartItems();
-        Task<cart> GetCartItem(long itemId);
+        Task<List<CartDTO>> GetCartItems();
+        Task<CartDTO> GetCartItem(long itemId);
         Task<bool> AddToCart(cart cart);
         Task<string> GetCartId(HttpContextBase context);
         Task<IEnumerable<CartViewModel>> GetUserCartItems(string cartId);

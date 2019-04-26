@@ -6,6 +6,7 @@ using System.Web;
 
 namespace PaystackPaymentIntegration.Models.Entities
 {
+    //https://github.com/developerslearnit/Paystack.Net.SampleApp/blob/master/Models/Repository/CartRepository.cs#L21
     public partial class product
     {
         public product()

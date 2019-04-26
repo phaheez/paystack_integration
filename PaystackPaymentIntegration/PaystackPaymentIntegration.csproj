@@ -198,13 +198,18 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\BaseRepository.cs" />
+    <Compile Include="Models\DataModel\BaseContext.cs" />
     <Compile Include="Models\DataModel\ShoppingCartContext.cs" />
     <Compile Include="Models\DTOs\Readonly\CartDTO.cs" />
+    <Compile Include="Models\DTOs\Readonly\OrderDetailDTO.cs" />
+    <Compile Include="Models\DTOs\Readonly\OrderDTO.cs" />
+    <Compile Include="Models\DTOs\Readonly\ProductDTO.cs" />
     <Compile Include="Models\Entities\cart.cs" />
     <Compile Include="Models\Entities\order.cs" />
     <Compile Include="Models\Entities\order_detail.cs" />
     <Compile Include="Models\Entities\product.cs" />
     <Compile Include="Models\Helpers.cs" />
+    <Compile Include="Models\Interfaces\IBaseRepository.cs" />
     <Compile Include="Models\Interfaces\ICart.cs" />
     <Compile Include="Models\Interfaces\IEntity.cs" />
     <Compile Include="Models\Interfaces\IProducts.cs" />

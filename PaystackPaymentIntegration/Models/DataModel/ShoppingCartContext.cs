@@ -7,18 +7,20 @@ using System.Web;
 
 namespace PaystackPaymentIntegration.Models.DataModel
 {
-    public partial class ShoppingCartContext : DbContext
+    public partial class ShoppingCartContext : BaseContext<ShoppingCartContext>
     {
-        public ShoppingCartContext() : base("name=ShoppingCartEntities") { }
+        //public ShoppingCartContext() : base("name=ShoppingCartEntities") { }
 
-        protected override void OnModelCreating(DbModelBuilder modelBuilder)
-        {
-            base.OnModelCreating(modelBuilder);
-        }
+        
 
         public virtual DbSet<cart> cart { get; set; }
         public virtual DbSet<order> order { get; set; }
         public virtual DbSet<order_detail> order_detail { get; set; }
         public virtual DbSet<product> product { get; set; }
+
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            //base.OnModelCreating(modelBuilder);
+        }
     }
 }
