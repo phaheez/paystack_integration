@@ -205,7 +205,13 @@
     <Compile Include="Models\Entities\order_detail.cs" />
     <Compile Include="Models\Entities\product.cs" />
     <Compile Include="Models\Helpers.cs" />
+    <Compile Include="Models\Interfaces\ICart.cs" />
     <Compile Include="Models\Interfaces\IEntity.cs" />
+    <Compile Include="Models\Interfaces\IProducts.cs" />
+    <Compile Include="Models\Repository\CartRepository.cs" />
+    <Compile Include="Models\Repository\ProductsRepository.cs" />
+    <Compile Include="Models\ViewModels\CartViewModel.cs" />
+    <Compile Include="Models\ViewModels\PaystackCustomerModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -264,10 +270,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Models\BaseRepository\" />
     <Folder Include="Models\DTOs\Writable\" />
-    <Folder Include="Models\Repository\" />
-    <Folder Include="Models\ViewModels\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

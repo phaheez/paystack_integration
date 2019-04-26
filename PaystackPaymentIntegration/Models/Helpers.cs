@@ -5,7 +5,11 @@ using System.Web;
 
 namespace PaystackPaymentIntegration.Models
 {
-    public class Helpers
+    public static class Helpers
     {
+        public static string CalcTotalPrice(int quantity, decimal price)
+        {
+            return ((decimal)quantity * price).ToString("#,##.00");
+        }
     }
 }
