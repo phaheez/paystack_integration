@@ -192,31 +192,21 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\SampleDirection.cs" />
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
-    <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\ValuesController.cs" />
+    <Compile Include="Controllers\TransactionController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\BaseRepository.cs" />
     <Compile Include="Models\DataModel\BaseContext.cs" />
-    <Compile Include="Models\DataModel\ShoppingCartContext.cs" />
-    <Compile Include="Models\DTOs\Readonly\CartDTO.cs" />
-    <Compile Include="Models\DTOs\Readonly\OrderDetailDTO.cs" />
-    <Compile Include="Models\DTOs\Readonly\OrderDTO.cs" />
-    <Compile Include="Models\DTOs\Readonly\ProductDTO.cs" />
-    <Compile Include="Models\Entities\cart.cs" />
-    <Compile Include="Models\Entities\order.cs" />
-    <Compile Include="Models\Entities\order_detail.cs" />
-    <Compile Include="Models\Entities\product.cs" />
-    <Compile Include="Models\Helpers.cs" />
+    <Compile Include="Models\DataModel\PaymentContext.cs" />
+    <Compile Include="Models\DTOs\Readonly\TransactionDTO.cs" />
+    <Compile Include="Models\DTOs\Writable\TransactionDTO.cs" />
+    <Compile Include="Models\Entities\transaction_record.cs" />
     <Compile Include="Models\Interfaces\IBaseRepository.cs" />
-    <Compile Include="Models\Interfaces\ICart.cs" />
-    <Compile Include="Models\Interfaces\IEntity.cs" />
-    <Compile Include="Models\Interfaces\IProducts.cs" />
-    <Compile Include="Models\Repository\CartRepository.cs" />
-    <Compile Include="Models\Repository\ProductsRepository.cs" />
-    <Compile Include="Models\ViewModels\CartViewModel.cs" />
-    <Compile Include="Models\ViewModels\PaystackCustomerModel.cs" />
+    <Compile Include="Models\Interfaces\ITransactionRepository.cs" />
+    <Compile Include="Models\IUnitOfWork.cs" />
+    <Compile Include="Models\Repository\TransactionRepository.cs" />
+    <Compile Include="Models\PaymentUOW.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -225,6 +215,7 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\loading.gif" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -269,13 +260,14 @@
     <Content Include="Content\Site.css" />
     <Content Include="Views\Web.config" />
     <Content Include="Views\_ViewStart.cshtml" />
-    <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\Transaction\make_payment.cshtml" />
+    <Content Include="Views\Transaction\PaymentError.cshtml" />
+    <Content Include="Views\Transaction\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Models\DTOs\Writable\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

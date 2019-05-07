@@ -8,14 +8,8 @@ namespace PaystackPaymentIntegration.Models.DataModel
 {
     public class BaseContext<TContext> : DbContext where TContext : DbContext
     {
-        static BaseContext()
-        {
-            Database.SetInitializer<TContext>(null);
-        }
+        static BaseContext() { Database.SetInitializer<TContext>(null); }
 
-        protected BaseContext()
-            : base("name=ShoppingCartEntities")
-        {
-        }
+        protected BaseContext() : base("name=PaymentEntities") { }
     }
 }

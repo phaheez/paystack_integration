@@ -1,0 +1,51 @@
+﻿@model List<PaystackPaymentIntegration.Models.DTOs.Readonly.TransactionDTO>
+
+@{
+    ViewBag.Title = "get_all_transaction";
+}
+
+<h2>get_all_transaction</h2>
+
+<p>
+    @Html.ActionLink("Pay Now", "make_payment")
+</p>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayName("Email")
+        </th>
+        <th>
+            @Html.DisplayName("Amount")
+        </th>
+        <th>
+            @Html.DisplayName("Reference")
+        </th>
+        <th>
+            @Html.DisplayName("Created Date")
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in ViewBag.Results)
+    {
+    <tr>
+        <td>
+            @item.email
+        </td>
+        <td>
+            @item.amount
+        </td>
+        <td>
+            @item.reference
+        </td>
+        <td>
+            @item.created_date
+        </td>
+        <td>
+            @Html.ActionLink("View", "Details", new { id = item.reference })
+        </td>
+    </tr>
+    }
+
+</table>

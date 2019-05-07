@@ -15,6 +15,5 @@ namespace PaystackPaymentIntegration.Models.Interfaces
         IQueryable<T> GetWhere(Expression<Func<T, bool>> wherePredicate);
         Task<bool> ExistWhereAsync(Expression<Func<T, bool>> wherePredicate);
         void Override(T destination, T source);
-        Task<int> CompleteAsync();
     }
 }
