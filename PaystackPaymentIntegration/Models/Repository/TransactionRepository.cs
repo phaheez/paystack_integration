@@ -10,6 +10,7 @@ using System.Data.Entity;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
+using AutoMapper;
 
 namespace PaystackPaymentIntegration.Models.Repository
 {
@@ -24,17 +25,9 @@ namespace PaystackPaymentIntegration.Models.Repository
 
         public async Task<List<TransactionDTO>> GetAllTransactions()
         {
-            var result = await GetAll()
-                .Select(x => new TransactionDTO
-                {
-                    transaction_id = x.transaction_id,
-                    email = x.email,
-                    amount = x.amount,
-                    reference = x.reference,
-                    created_date = x.created_date
-                }).ToListAsync();
+            var allTransaction = await GetAll().ToListAsync();
 
-            return result;
+            return Mapper.Map<List<TransactionDTO>>(allTransaction);
         }
 
         public TransactionInitializeResponse InitializeTransaction(string email, int amount)

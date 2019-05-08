@@ -21,9 +21,9 @@ namespace PaystackPaymentIntegration.Controllers
             using (var uow = new PaymentUOW())
             {
                 var results = await uow.Transaction.GetAllTransactions();
-                ViewBag.Results = results;
+                //ViewBag.Results = results;
 
-                return View();
+                return View(results);
             } 
         }
 

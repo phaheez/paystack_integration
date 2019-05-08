@@ -14,7 +14,5 @@ namespace PaystackPaymentIntegration.Models.DTOs.Readonly
         public int amount { get; set; }
 
         public string reference { get; set; }
-
-        public DateTime created_date { get; set; }
     }
 }

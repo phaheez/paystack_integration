@@ -7,40 +7,34 @@
 <h2>All Transaction(s)</h2>
 
 <p>
-    @Html.ActionLink("Make New Payment", "make_payment", new { @class = "btn btn-success btn-sm" })
+    @Html.ActionLink("Make New Payment", "make_payment", null, new { @class = "btn btn-success btn-sm" })
 </p>
 
 <table class="table">
     <tr>
+        <th>
+            @Html.DisplayName("Reference")
+        </th>
         <th>
             @Html.DisplayName("Email")
         </th>
         <th>
             @Html.DisplayName("Amount(#)")
         </th>
-        <th>
-            @Html.DisplayName("Reference")
-        </th>
-        <th>
-            @Html.DisplayName("Created Date")
-        </th>
         <th></th>
     </tr>
 
-    @foreach (var item in ViewBag.Results)
+    @foreach (var item in Model)
     {
         <tr>
+            <td>
+                @item.reference
+            </td>
             <td>
                 @item.email
             </td>
             <td>
                 @item.amount.ToString("#,##.00")
-            </td>
-            <td>
-                @item.reference
-            </td>
-            <td>
-                @item.created_date
             </td>
             <td>
                 @Html.ActionLink("View Details", "payment_details", new { tranxRef = item.reference }, new { @class = "btn btn-primary btn-sm" })
