@@ -9,6 +9,7 @@ namespace PaystackPaymentIntegration.Models
 {
     public interface IUnitOfWork<out TContext> : IDisposable where TContext : BaseContext<TContext>
     {
+        int Complete();
         Task<int> CompleteAsync();
         TContext DBContext { get; }
     }

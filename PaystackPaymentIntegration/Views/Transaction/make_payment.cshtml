@@ -51,35 +51,55 @@
     <div class="col-md-3"></div>
 </div>
 
-
-
 @section Scripts {
 
     <script>
 
         $(function () {
 
-            function InitTransaction(data) {
+            function InitTransaction(e, a) {
                 return $.ajax({
                     type: "POST",
                     url: "@Url.Action("InitializePayment", "Transaction", new { area=""})",
-                    data: data,
+                    data: JSON.stringify({ email: e, amount: a }),
+                    dataType: 'json',
+                    contentType: 'application/json;charset=utf-8'
+                });
+            }
+
+            function SaveToDB(e, a, r) {
+                return $.ajax({
+                    type: "POST",
+                    url: "@Url.Action("SavePayment", "Transaction", new { area=""})",
+                    data: JSON.stringify({ email: e, amount: a, reference: r }),
                     dataType: 'json',
                     contentType: 'application/json;charset=utf-8'
                 });
             }
 
             $("#btnPayNow").click(function (e) {
+                var email = $("#txtEmail").val();
+                var amount = $("#txtAmount").val();
+
                 $(".redirect-message").show();
                 e.preventDefault();
 
-                var data = JSON.stringify({
-                    email: $("#txtEmail").val(),
-                    amount: $("#txtAmount").val(),
-                });
-
-                $.when(InitTransaction(data)).then(function (response) {
+                //perform transaction
+                $.when(InitTransaction(email, amount)).then(function (response) {
                     if (response.error == false) {
+
+                        //save payment to database
+                        $.when(SaveToDB(email, amount, response.result.Data.Reference)).then(function (res) {
+                            if (res.error == false) {
+                                console.log(res.result);
+                            } else {
+                                console.log(res.result);
+                            }
+                        }).fail(function (err) {
+                            console.log(err);
+                        });
+
+                        //redirect to payment gateway page
                         window.location.href = response.result.Data.AuthorizationUrl;
                     } else {
                         $(".redirect-message").hide();

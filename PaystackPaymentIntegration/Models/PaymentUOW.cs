@@ -34,6 +34,11 @@ namespace PaystackPaymentIntegration.Models
             get { return _dbContext; }
         }
 
+        public int Complete()
+        {
+            return _dbContext.SaveChanges();
+        }
+
         public async Task<int> CompleteAsync()
         {
             return await _dbContext.SaveChangesAsync();

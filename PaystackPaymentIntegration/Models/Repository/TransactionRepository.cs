@@ -47,7 +47,7 @@ namespace PaystackPaymentIntegration.Models.Repository
             return response;
         }
 
-        public TransactionVerifyResponse VerifyTransaction(string tranxRef)
+        public TransactionVerify.Data VerifyTransaction(string tranxRef)
         {
             var secretKey = ConfigurationManager.AppSettings["PayStackSecret"].ToString();
 
@@ -55,28 +55,7 @@ namespace PaystackPaymentIntegration.Models.Repository
 
             var response = transactionAPI.Transactions.Verify(tranxRef);
 
-            return response;
-        }
-
-        public TransactionFetchResponse FetchTransaction(string transactionId)
-        {
-            var secretKey = ConfigurationManager.AppSettings["PayStackSecret"];
-            var transactionAPI = new PayStackApi(secretKey);
-
-            var response = transactionAPI.Transactions.Fetch(transactionId);
-
-            return response;
-        }
-
-        public TransactionListResponse AllTransactions()
-        {
-            var secretKey = ConfigurationManager.AppSettings["PayStackSecret"].ToString();
-
-            var transactionAPI = new PayStackApi(secretKey);
-
-            var response = transactionAPI.Transactions.List();
-
-            return response;
+            return response.Data;
         }
     }
 }

@@ -13,8 +13,6 @@ namespace PaystackPaymentIntegration.Models.Interfaces
     {
         Task<List<TransactionDTO>> GetAllTransactions();
         TransactionInitializeResponse InitializeTransaction(string email, int amount);
-        TransactionVerifyResponse VerifyTransaction(string tranxRef);
-        TransactionFetchResponse FetchTransaction(string transactionId);
-        TransactionListResponse AllTransactions();
+        TransactionVerify.Data VerifyTransaction(string tranxRef);
     }
 }

@@ -1,0 +1,26 @@
+﻿@model PayStack.Net.TransactionVerify.Data
+
+@{
+    ViewBag.Title = "payment_details";
+
+    var data = ViewBag.Details;
+    var currency = data.Currency;
+    var amt = (data.Amount / 100).ToString("#,##");
+    var amount = currency + amt;
+}
+
+<div>
+    <h4>Transaction Details</h4>
+    <hr />
+
+    <div class="row">
+        <div class="col-md-12"><p><b>Email: </b> @data.Customer.Email</p></div>
+        <div class="col-md-12"><p><b>Reference: </b> @data.Reference</p></div>
+        <div class="col-md-12"><p><b>Amount: </b> @amount</p></div>
+        <div class="col-md-12"><p><b>Status: </b> @data.Status</p></div>
+        <div class="col-md-12"><p><b>Transaction Date: </b> @data.TransactionDate</p></div>
+    </div>
+</div>
+<p>
+    @Html.ActionLink("Back to List", "Index")
+</p>

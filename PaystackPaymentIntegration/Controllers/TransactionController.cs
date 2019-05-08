@@ -24,17 +24,16 @@ namespace PaystackPaymentIntegration.Controllers
                 ViewBag.Results = results;
 
                 return View();
-            }
-                
+            } 
         }
 
-        // GET: Transaction/make_payment
+        // New Payment View
         public ActionResult make_payment()
         {
             return View();
         }
 
-        // POST: Transaction/make_payment
+        //Make New Payment
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> make_payment([Bind(Include = "email,amount")] TransactionDTOW model)
@@ -52,30 +51,19 @@ namespace PaystackPaymentIntegration.Controllers
 
                         if (initializeResponse.Status)
                         {
+                            //save records to database
+                            var newRecord = new transaction_record
+                            {
+                                email = model.email,
+                                amount = model.amount,
+                                reference = initializeResponse.Data.Reference,
+                                created_date = DateTime.UtcNow
+                            };
+
+                            uow.Transaction.Add(newRecord);
+                            await uow.CompleteAsync();
+
                             Response.Redirect(initializeResponse.Data.AuthorizationUrl);
-
-                            //Verify Transaction
-                            var verifyResponse = uow.Transaction.VerifyTransaction(initializeResponse.Data.Reference);
-                            if (verifyResponse.Status)
-                            {
-                                //save records to database
-                                var newRecord = new transaction_record
-                                {
-                                    email = model.email,
-                                    amount = model.amount,
-                                    reference = initializeResponse.Data.Reference,
-                                    created_date = DateTime.UtcNow
-                                };
-
-                                uow.Transaction.Add(newRecord);
-                                await uow.CompleteAsync();
-
-                                //return RedirectToAction("fetch_transaction");
-                            }
-                            else
-                            {
-                                errorMessage = verifyResponse.Message;
-                            }
                         }
                         else
                         {
@@ -89,10 +77,24 @@ namespace PaystackPaymentIntegration.Controllers
                 catch (Exception ex)
                 {
                     ModelState.AddModelError("", ex.Message);
-                    //ModelState.AddModelError("", "Unable to save transactions. Try again, and if the problem persists see your system administrator.");
                 }
             }
             return View(model);
+        }
+
+        //View Payment Details
+        public ActionResult payment_details(string tranxRef)
+        {
+            if (tranxRef == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            var result = new PaymentUOW().Transaction.VerifyTransaction(tranxRef);
+
+            ViewBag.Details = result;
+
+            return View(result);
         }
 
         //Calling With Ajax from UI
@@ -110,5 +112,28 @@ namespace PaystackPaymentIntegration.Controllers
             }
         }
 
+        //Save to DB With Ajax from UI
+        public JsonResult SavePayment(string email, int amount, string reference)
+        {
+            using (var uow = new PaymentUOW())
+            {
+                var newRecord = new transaction_record
+                {
+                    email = email,
+                    amount = amount,
+                    reference = reference,
+                    created_date = DateTime.UtcNow
+                };
+
+                uow.Transaction.Add(newRecord);
+                int response = uow.Complete();
+
+                if (response > 0)
+                {
+                    return Json(new { error = false, result = "success" }, JsonRequestBehavior.AllowGet);
+                }
+                return Json(new { error = true, result = "error" }, JsonRequestBehavior.AllowGet);
+            }
+        }
     }
 }
